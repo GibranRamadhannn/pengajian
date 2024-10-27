@@ -48,7 +48,7 @@
   </div>
   <!-- Header end -->
   <!-- Content begin -->
-  <div class="mx-auto max-w-4xl py-2 md:py-3 sm:px-6 lg:px-8 mb-3 flex flex-col justify-center items-center">
+  <div class="mx-auto max-w-4xl py-1 md:py-3 sm:px-6 lg:px-8 mb-3 flex flex-col justify-center items-center">
    @yield('content')
   </div>
   <!-- Content end -->

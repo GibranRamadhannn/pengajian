@@ -21,10 +21,11 @@ class ParticipantsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create($gender)
+    public function create($gender, $indexgender)
     {
+        $indexgender;
         $gender;
-        return view('guest.guest', compact('gender'));
+        return view('guest.guest', compact('gender', 'indexgender'));
     }
 
     /**

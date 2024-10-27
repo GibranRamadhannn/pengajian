@@ -6,11 +6,13 @@
 
 <!-- Section header begin -->
 @section('header')
-<div class="p-2 md:p-4 flex flex-col justify-center items-center">
+<div class="p-1 md:p-4 flex flex-col justify-center items-center" style="font-family: Montserrat">
     <!-- Header Teks begin -->
-    <h1 class="font-bold text-2xl md:text-3xl text-white">ALHAMDULILLAH</h1>
-    <div class="bg-yellow-500 bg-opacity-70 p-1">
-        <h1 class="font-bold text-2xl md:text-3xl text-black">ANDA SUDAH TERDAFTAR</h1>
+    <h1 class="font-bold text-4xl md:text-3xl text-white" lang="ar" dir="rtl" style="text-shadow: 1px 1px #000">الحمد
+        للة كثيرا</h1>
+    <div class="bg-blue-500 bg-opacity-80 flex justify-center text-center px-4">
+        <h1 class="font-bold text-2xl md:text-3xl text-white" style="text-shadow: 1px 1px #000">ANDA SUDAH TERDAFTAR
+        </h1>
     </div>
     <!-- Header Teks end -->
 </div>
@@ -22,11 +24,12 @@
 <div class="p-2 md:p-4 flex flex-col justify-center items-center">
     <!-- barcode begin -->
     <div class="p-2 md:p-4">
-        <img src="{{ asset('/images/barcode-sample.jpeg') }}" alt="" class="w-50 h-50 md:w-[400px] md:h-50">
+        <img src="{{ asset('/images/barcode_sample-2.png') }}" alt="" class="w-50 h-50 md:w-[400px] md:h-50">
     </div>
     <!-- barcode end -->
     <!-- teks -->
-    <h1 class="font-normal text-lg md:text-2xl text-white text-center">silakan screenshot layar ini</h1>
+    <h1 class="font-normal text-lg md:text-2xl text-white text-center" style="font-family: Montserrat">silakan
+        screenshot layar ini</h1>
     <!-- icon & teks -->
     <div class="inline-flex justify-center items-center w-full gap-3 mt-2">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" id="info" width="20" height="20">
@@ -37,7 +40,8 @@
                 </path>
             </g>
         </svg>
-        <p href="#" class="text-xs font-normal text-yellow-500 hover:text-blue-300 underline italic">
+        <p href="#" class="text-xs font-normal text-yellow-500 hover:text-blue-300 underline italic"
+            style="font-family: Montserrat">
             pelajari lebih lanjut
         </p>
     </div>

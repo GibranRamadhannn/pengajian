@@ -12,12 +12,15 @@
 <div class="flex flex-col justify-center items-center md:justify-start">
     <div class="mx-auto max-w-6xl p-4 sm:px-6 sm:py-10 lg:px-8 mb-5 text-center">
         <!-- Section Content Teks begin -->
-        <div class="flex flex-col gap-4 p-2 mt-6">
-            <h1 class="font-bold text-4xl md:text-5xl text-white">Qadarullah</h1>
-            <div class="bg-yellow-500 bg-opacity-70 p-1">
-                <h1 class="font-bold text-3xl md:text-4xl text-black">QUOTA SUDAH PENUH</h1>
+        <div class="flex flex-col gap-4 p-2 mt-6" style="font-family: Montserrat">
+            <h1 class="font-bold text-4xl md:text-5xl text-white" style="text-shadow: 1px 1px #000">Pendaftaran Ditutup
+            </h1>
+            <div class="bg-yellow-500 bg-opacity-80 px-1 py-1">
+                <h1 class="font-bold text-3xl md:text-4xl text-black">QUOTA TERPENUHI
+                </h1>
             </div>
-            <h1 class="font-bold text-2xl md:text-3xl text-white">Terima Kasih</h1>
+            <h1 class="font-bold text-4xl md:text-3xl text-white" lang="ar" dir="rtl" style="text-shadow: 1px 1px #000">
+                بارك الله فيك</h1>
         </div>
         <!-- Section Content Teks end -->
     </div>

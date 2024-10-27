@@ -1,3 +1,11 @@
+<!-- IF ELSE Function for gender was chained to Text-color and Icon
+    Don't Forget to add P or W index in route if button in Guest-Home was clicked 
+-->
+
+<!-- Gender P = Pria or Laki-Laki in DB
+    Gender W = Wanita or Perempuan in DB
+-->
+
 <!-- Extending layout -->
 @extends('layouts.guest-index')
 
@@ -17,9 +25,15 @@
                 @csrf
                 <div class="mx-auto max-w-full text-center lg:mx-0 lg:flex-auto lg:py-12 lg:text-left">
                     <!-- Input Nama lengkap -->
-                    <div class="mb-2">
+                    <div class="mb-2" style="font-family: Montserrat">
                         <!-- Label -->
-                        <label for="name" class="block text-xl font-bold leading-1 text-yellow-500">Nama Lengkap</label>
+                        @if ($indexgender == 'pria' && $gender == 'P')
+                        <label for="name" class="block text-xl font-medium leading-1 text-blue-300">Nama
+                            Lengkap</label>
+                        @else
+                        <label for="name" class="block text-xl font-medium leading-1 text-pink-300">Nama
+                            Lengkap</label>
+                        @endif
                         <!-- Input -->
                         <div class="relative mt-2 rounded-md shadow-sm">
                             <input type="text" name="name" id="name" value="{{ old('name') }}"
@@ -29,10 +43,15 @@
                     </div>
 
                     <!-- Input Nomor WA -->
-                    <div class="mb-2">
+                    <div class="mb-2" style="font-family: Montserrat">
                         <!-- Label -->
-                        <label for="phone" class="block text-xl font-bold leading-1 text-yellow-500">Nomor WA
+                        @if ($indexgender === 'pria' && $gender === 'P')
+                        <label for="phone" class="block text-xl font-medium leading-1 text-blue-300">Nomor WA
                             Aktif</label>
+                        @else
+                        <label for="phone" class="block text-xl font-medium leading-1 text-pink-300">Nomor WA
+                            Aktif</label>
+                        @endif
                         <!-- Input -->
                         <div class="relative mt-2 rounded-md shadow-sm">
                             <input type="text" name="phone" id="phone" value="{{ old('phone') }}"
@@ -42,109 +61,85 @@
                     </div>
 
                     <!-- Input Usia -->
-                    <div class="mt-2">
+                    <div class="mt-2" style="font-family: Montserrat">
                         <!-- label -->
-                        <div>
-                            <label class="block text-xl font-bold leading-1 text-yellow-500">Usia
-                                (tahun)</label>
-                        </div>
+                        @if ($indexgender === 'pria' && $gender === 'P')
+                        <label class="block text-xl font-medium leading-1 text-blue-300">Usia
+                            (tahun)
+                        </label>
+                        @else
+                        <label class="block text-xl font-medium leading-1 text-pink-300">Usia
+                            (tahun)
+                        </label>
+                        @endif
                         <!-- option -->
+                        @if ($indexgender === 'pria' && $gender === 'P')
                         <div class="inline-flex gap-5 md:inline-flex justify-center items-center">
                             <!-- Age Radio Options : Remaja -->
                             <div class="flex items-center gap-x-1">
                                 <input id="usia-remaja" name="age" type="radio" value="Remaja" {{ old('age')=='Remaja'
-                                    ? 'checked' : '' }}
-                                    class="h-4 w-4 border-gray-300 text-yellow-400 focus:ring-yellow-500">
+                                    ? 'checked' : '' }} class="h-4 w-4 border-white text-blue-300 focus:ring-blue-400">
                                 <label for="usia-remaja"
-                                    class="block text-xs font-medium leading-6 text-yellow-500">12-20</label>
+                                    class="block text-large font-medium leading-6 text-blue-300">12-20</label>
                             </div>
                             <!-- Age Radio Options : Dewasa -->
                             <div class="flex items-center gap-x-1">
                                 <input id="usia-dewasa" name="age" type="radio" value="Dewasa" {{ old('age')=='Dewasa'
-                                    ? 'checked' : '' }}
-                                    class="h-4 w-4 border-gray-300 text-yellow-400 focus:ring-yellow-500">
+                                    ? 'checked' : '' }} class="h-4 w-4 border-white text-blue-300 focus:ring-blue-400">
                                 <label for="usia-dewasa"
-                                    class="block text-xs font-medium leading-6 text-yellow-500">21-40</label>
+                                    class="block text-large font-medium leading-6 text-blue-300">21-40</label>
                             </div>
                             <!-- Age Radio Options : Tua -->
                             <div class="flex items-center gap-x-1">
                                 <input id="usia-tua" name="age" type="radio" value="Tua" {{ old('age')=='Tua'
                                     ? 'checked' : '' }}
-                                    class="h-4 w-4 border-gray-300 text-yellow-400 focus:ring-yellow-500">
+                                    class="h-4 w-4 border-gray-300 text-blue-300 focus:ring-blue-400">
                                 <label for="usia-tua"
-                                    class="block text-xs font-medium leading-6 text-yellow-500">>41</label>
+                                    class="block text-large font-medium leading-6 text-blue-300">>41</label>
                             </div>
                             <!-- Icon gender -->
-                            @if ($gender == 'L')
-                            <div
-                                class="rounded-full bg-yellow-500 w-[55px] h-[55px] flex justify-center items-center mx-4">
+                            <div class="rounded-full bg-white w-[55px] h-[55px] flex justify-center items-center mx-4">
                                 <div>
-                                    <svg id="SvgjsSvg1028" width="40" height="40" xmlns="http://www.w3.org/2000/svg"
+                                    <svg id="SvgjsSvg1001" width="40" height="40" xmlns="http://www.w3.org/2000/svg"
                                         version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
                                         xmlns:svgjs="http://svgjs.com/svgjs">
-                                        <defs id="SvgjsDefs1029"></defs>
-                                        <g id="SvgjsG1030" transform="matrix(1,0,0,1,0,0)"><svg
-                                                xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"
+                                        <defs id="SvgjsDefs1002"></defs>
+                                        <g id="SvgjsG1008"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"
                                                 viewBox="0 0 32 32" width="40" height="40">
-                                                <path fill="#ffffff"
-                                                    d="M18.5,14.5h-5a5.07583,5.07583,0,0,1-3.478,2.943l-3.16446.76383A7,7,0,0,0,1.5,25.01139V29.5a2,2,0,0,0,2,2h25a2,2,0,0,0,2-2V25.01139a7,7,0,0,0-5.35753-6.80458L21.978,17.443A5.07583,5.07583,0,0,1,18.5,14.5Z"
-                                                    class="colorfff svgShape"></path>
-                                                <path fill="#ffdaa7"
-                                                    d="M19.5,18.07937a4.99822,4.99822,0,0,1-7,0v-2.9l2.39,1.59a1.99408,1.99408,0,0,0,2.22,0l2.39-1.59v2.9Z"
-                                                    class="colorffdaa7 svgShape"></path>
-                                                <path fill="#8b8891"
-                                                    d="M20.23843,17.09631a5.00153,5.00153,0,0,1-8.55408,0L9.6514,17.5251a6.992,6.992,0,0,0,12.62,0Z"
-                                                    class="color8b8891 svgShape"></path>
-                                                <path fill="#ffffff"
-                                                    d="M11,3.5a4.42636,4.42636,0,0,1,1.59689-2.17184A4.38185,4.38185,0,0,1,15.16228.5h1.67544A4.38743,4.38743,0,0,1,21,3.5"
-                                                    class="colore5303e svgShape"></path>
-                                                <path fill="#2c2b2d"
-                                                    d="M21,4a.5019.5019,0,0,1-.47461-.3418A3.88248,3.88248,0,0,0,16.83789,1H15.16211a3.86855,3.86855,0,0,0-2.27344.7334,3.9335,3.9335,0,0,0-1.41406,1.9248.50028.50028,0,0,1-.94922-.3164A4.935,4.935,0,0,1,12.30469.92285,4.857,4.857,0,0,1,15.16211,0h1.67578a4.88223,4.88223,0,0,1,4.63672,3.3418.50135.50135,0,0,1-.31641.63281A.49616.49616,0,0,1,21,4Z"
-                                                    class="color2c2b2d svgShape"></path>
-                                                <path fill="#2c2b2d"
-                                                    d="M28.5,32H3.5A2.50231,2.50231,0,0,1,1,29.5V25.01172a7.4798,7.4798,0,0,1,5.74023-7.291l3.165-.76367A4.59534,4.59534,0,0,0,13.04,14.30371.50066.50066,0,0,1,13.5,14h5a.50066.50066,0,0,1,.46.30371A4.59534,4.59534,0,0,0,22.09473,16.957l3.165.76367A7.4798,7.4798,0,0,1,31,25.01172V29.5A2.50231,2.50231,0,0,1,28.5,32ZM13.81934,15a5.6107,5.6107,0,0,1-3.67969,2.92969l-3.165.76367A6.48205,6.48205,0,0,0,2,25.01172V29.5A1.50164,1.50164,0,0,0,3.5,31h25A1.50164,1.50164,0,0,0,30,29.5V25.01172a6.48205,6.48205,0,0,0-4.97461-6.31836l-3.165-.76367A5.60786,5.60786,0,0,1,18.18066,15Z"
-                                                    class="color2c2b2d svgShape"></path>
-                                                <path fill="#2c2b2d"
-                                                    d="M16,22a7.53543,7.53543,0,0,1-6.76074-4.26465.50013.50013,0,1,1,.90234-.43164,6.49075,6.49075,0,0,0,11.7168,0,.50013.50013,0,0,1,.90234.43164A7.53543,7.53543,0,0,1,16,22Z"
-                                                    class="color2c2b2d svgShape"></path>
-                                                <path fill="#2c2b2d"
-                                                    d="M16 20a5.46561 5.46561 0 0 1-4.70508-2.64941.50044.50044 0 0 1 .85547-.51954 4.50076 4.50076 0 0 0 7.69922 0 .50044.50044 0 0 1 .85547.51954A5.46561 5.46561 0 0 1 16 20zM25.5 32a.49971.49971 0 0 1-.5-.5v-4a.5.5 0 0 1 1 0v4A.49971.49971 0 0 1 25.5 32zM6.5 32a.49971.49971 0 0 1-.5-.5v-4a.5.5 0 0 1 1 0v4A.49971.49971 0 0 1 6.5 32z"
-                                                    class="color2c2b2d svgShape"></path>
-                                                <rect width="3" height="10" x="14.5" y="21.5" fill="#8b8891"
-                                                    class="color8b8891 svgShape"></rect>
-                                                <path fill="#2c2b2d"
-                                                    d="M17.5,32h-3a.49971.49971,0,0,1-.5-.5v-10a.49971.49971,0,0,1,.5-.5h3a.49971.49971,0,0,1,.5.5v10A.49971.49971,0,0,1,17.5,32ZM15,31h2V22H15Z"
-                                                    class="color2c2b2d svgShape"></path>
-                                                <path fill="#ffdaa7"
-                                                    d="M19.75594,14.99606l-2.64656,1.76433a2,2,0,0,1-2.21876,0l-2.64656-1.76433a2,2,0,0,1-.87052-1.38127L10.5,7.5a30.67639,30.67639,0,0,1,11,0l-.87354,6.11479A2,2,0,0,1,19.75594,14.99606Z"
-                                                    class="colorffdaa7 svgShape"></path>
-                                                <path fill="#8b8891"
-                                                    d="M21.5,5.5c-1.70232-.13481-3.54082-.21742-5.49948-.21744-1.95906,0-3.7979.08261-5.50052.21744-.5916-.22789-1-.6104-1-1a1,1,0,0,1,1-1c1.74275-.11034,3.59412-.1749,5.54352-.17392C17.96082,3.327,19.783,3.3913,21.5,3.5a1,1,0,0,1,0,2Z"
-                                                    class="color8b8891 svgShape"></path>
-                                                <path fill="#2c2b2d"
-                                                    d="M21.5,6c-.0127,0-.02637-.001-.03906-.00195a69.35375,69.35375,0,0,0-10.92188,0,.52073.52073,0,0,1-.21875-.03125C9.49414,5.64844,9,5.10059,9,4.5A1.50164,1.50164,0,0,1,10.5,3c1.81543-.11621,3.71875-.14941,5.54395-.17383,1.81835.001,3.665.05957,5.4873.17481h.002A1.49969,1.49969,0,0,1,21.5,6ZM16.001,4.78223c1.8291,0,3.68457.07324,5.51562.21777A.50093.50093,0,0,0,22,4.5a.50609.50609,0,0,0-.5-.5c-1.84766-.11621-3.66992-.1875-5.499-.17383-1.81739,0-3.65723.0586-5.46973.17285A.51.51,0,0,0,10,4.5c0,.08789.17188.3125.58008.49219C12.37891,4.85254,14.20215,4.78223,16.001,4.78223Z"
-                                                    class="color2c2b2d svgShape"></path>
-                                                <path fill="#58565d"
-                                                    d="M21,10.38048l-2.7498,3.24545a.29148.29148,0,0,1-.46491-.02675l-.55307-.82961a.78224.78224,0,0,0-.65086-.34833H15.41864a.78222.78222,0,0,0-.65084.34832l-.55588.83381a.29148.29148,0,0,1-.46253.02951l-2.82664-3.2524-.00275.00076.45,3.15a2.02184,2.02184,0,0,0,.87,1.39l2.65,1.76a1.99408,1.99408,0,0,0,2.22,0l2.65-1.76a2.02184,2.02184,0,0,0,.87-1.39l.45-3.14"
-                                                    class="color58565d svgShape"></path>
-                                                <path fill="#2c2b2d"
-                                                    d="M16,17.59766a2.50292,2.50292,0,0,1-1.38672-.4209L11.9668,15.41211a2.5009,2.5009,0,0,1-1.08789-1.72656l-.874-6.11524a.5002.5002,0,0,1,.419-.56445,31.01581,31.01581,0,0,1,11.15234,0,.5002.5002,0,0,1,.41895.56445l-.874,6.11524a2.5009,2.5009,0,0,1-1.08789,1.72656l-2.64648,1.76465A2.50056,2.50056,0,0,1,16,17.59766ZM11.06543,7.9209l.80371,5.624a1.49755,1.49755,0,0,0,.65234,1.03516L15.168,16.34473a1.49982,1.49982,0,0,0,1.66406,0l2.64649-1.76465h0a1.49755,1.49755,0,0,0,.65234-1.03516l.80371-5.624A29.2702,29.2702,0,0,0,11.06543,7.9209Z"
-                                                    class="color2c2b2d svgShape"></path>
-                                                <path fill="#2c2b2d"
-                                                    d="M13.96777,14.31152a.78933.78933,0,0,1-.59472-.26953l-2.82813-3.25488a.5005.5005,0,0,1,.75586-.65625l2.64649,3.04687.40429-.60644A1.28231,1.28231,0,0,1,15.419,12h1.1621a1.28231,1.28231,0,0,1,1.06739.57129l.39941.59863,2.57031-3.03418a.50029.50029,0,0,1,.76368.64649l-2.75,3.24609a.79374.79374,0,0,1-.64942.27832.78575.78575,0,0,1-.61328-.35156l-.55273-.8291A.28205.28205,0,0,0,16.58105,13H15.419a.28205.28205,0,0,0-.23536.126l-.55566.833a.78374.78374,0,0,1-.60547.35059A.51253.51253,0,0,1,13.96777,14.31152Z"
-                                                    class="color2c2b2d svgShape"></path>
-                                                <path fill="#8b8891"
-                                                    d="M21.5,7.5a51.682,51.682,0,0,0-11,0,1,1,0,0,1,0-2c1.67862-.13293,3.48793-.215,5.41293-.21739,1.99074-.00249,3.8586.0805,5.58707.21739a1,1,0,0,1,0,2Z"
-                                                    class="color8b8891 svgShape"></path>
-                                                <path fill="#2c2b2d"
-                                                    d="M21.5,8a.47772.47772,0,0,1-.05273-.00293,51.56153,51.56153,0,0,0-5.4043-.291h-.02442a51.40732,51.40732,0,0,0-5.46484.291h-.00586A1.49893,1.49893,0,1,1,10.5,5c1.76563-.1416,3.59961-.21484,5.41211-.21777,1.87109.02539,3.76465.07226,5.62695.21972H21.542A1.49931,1.49931,0,0,1,21.5,8ZM15.98047,5.78223h-.06641c-1.78711.00293-3.5957.07519-5.375.21582A.5135.5135,0,0,0,10,6.5a.50609.50609,0,0,0,.5.5,51.42307,51.42307,0,0,1,5.51953-.29395H16.044A52.43257,52.43257,0,0,1,21.52246,7,.50026.50026,0,0,0,21.5,6C19.64648,5.85449,17.80273,5.78223,15.98047,5.78223Z"
-                                                    class="color2c2b2d svgShape"></path>
+                                                <path fill="#3b82f6"
+                                                    d="M26 11.54a3.12 3.12 0 0 0-1.85-.54h-2.06a2.1 2.1 0 0 0-1.27.4 7.94 7.94 0 0 1-9.63 0 2.1 2.1 0 0 0-1.28-.4H7.85a3.13 3.13 0 0 0-1.85.54 3 3 0 0 0-.82 4l8.18 13.91A3.13 3.13 0 0 0 15.59 31a3 3 0 0 0 3-1.45l8.25-14a3 3 0 0 0-.84-4.01Z"
+                                                    class="color7dccfc svgShape"></path>
+                                                <circle cx="16" cy="5" r="5" fill="#3b82f6"
+                                                    class="color7dccfc svgShape"></circle>
                                             </svg></g>
                                     </svg>
                                 </div>
                             </div>
-                            @endif
-                            @if ($gender == 'P')
+                        </div>
+                        @else
+                        <div class="inline-flex gap-5 md:inline-flex justify-center items-center">
+                            <!-- Age Radio Options : Remaja -->
+                            <div class="flex items-center gap-x-1">
+                                <input id="usia-remaja" name="age" type="radio" value="Remaja" {{ old('age')=='Remaja'
+                                    ? 'checked' : '' }} class="h-4 w-4 border-white text-pink-300 focus:ring-pink-400">
+                                <label for="usia-remaja"
+                                    class="block text-xs font-medium leading-6 text-pink-300">12-20</label>
+                            </div>
+                            <!-- Age Radio Options : Dewasa -->
+                            <div class="flex items-center gap-x-1">
+                                <input id="usia-dewasa" name="age" type="radio" value="Dewasa" {{ old('age')=='Dewasa'
+                                    ? 'checked' : '' }} class="h-4 w-4 border-white text-pink-300 focus:ring-pink-400">
+                                <label for="usia-dewasa"
+                                    class="block text-xs font-medium leading-6 text-pink-300">21-40</label>
+                            </div>
+                            <!-- Age Radio Options : Tua -->
+                            <div class="flex items-center gap-x-1">
+                                <input id="usia-tua" name="age" type="radio" value="Tua" {{ old('age')=='Tua'
+                                    ? 'checked' : '' }} class="h-4 w-4 border-white text-pink-300 focus:ring-pink-400">
+                                <label for="usia-tua"
+                                    class="block text-xs font-medium leading-6 text-pink-300">>41</label>
+                            </div>
+                            <!-- Icon gender -->
                             <div
                                 class="rounded-full bg-blue-400 w-[55px] h-[55px] flex justify-center items-center mx-4">
                                 <div>
@@ -183,11 +178,11 @@
                                     </svg>
                                 </div>
                             </div>
-                            @endif
                         </div>
+                        @endif
 
                         <!-- Additional Form Elements -->
-                        <div class="mt-5 flex justify-center items-center gap-4">
+                        <div class="mt-5 flex justify-center items-center gap-4" style="font-family: Montserrat">
                             <button type="submit"
                                 class="bg-green-500 text-black px-6 py-3 rounded-lg font-medium hover:bg-green-300 hover:text-green-700">
                                 Kirim
@@ -200,7 +195,7 @@
                     </div>
 
                     <!-- Input Gender begin -->
-                    <div class="mt-2" style="display: none">
+                    <div class="mt-2" style="display: none" style="font-family: Montserrat">
                         <!-- Title begin -->
                         <div>
                             <label class="block text-xl font-bold leading-1 text-yellow-500">Jenis
@@ -212,7 +207,7 @@
                             <div class="flex items-center gap-x-1">
                                 <input id="gender-l" name="gender" type="radio" value="laki-laki"
                                     class="h-4 w-4 border-gray-300 text-yellow-400 focus:ring-yellow-500" {{
-                                    $gender=='L' ? 'checked' : '' }}>
+                                    $gender=='P' ? 'checked' : '' }}>
                                 <label for="gender-l"
                                     class="block text-xs font-medium leading-6 text-yellow-500">Laki-laki</label>
                             </div>
@@ -221,7 +216,7 @@
                             <div class="flex items-center gap-x-1">
                                 <input id="gender-p" name="gender" type="radio" value="perempuan"
                                     class="h-4 w-4 border-gray-300 text-yellow-400 focus:ring-yellow-500" {{
-                                    $gender=='P' ? 'checked' : '' }}>
+                                    $gender=='W' ? 'checked' : '' }}>
                                 <label for="gender-p"
                                     class="block text-xs font-medium leading-6 text-yellow-500">Perempuan</label>
                             </div>

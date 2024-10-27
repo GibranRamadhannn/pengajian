@@ -9,15 +9,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     Route::get('/', [GuestController::class, 'index'])->name('guest.home');
-    Route::get('/participant/create/{gender?}', [ParticipantsController::class, 'create'])->name('participant.create');
+    Route::get('/participant/{indexgender?}/{gender?}', [ParticipantsController::class, 'create'])->name('participant.create');
     Route::post('/participant/store', [ParticipantsController::class, 'store'])->name('participant.store');
 });
 
 Route::get('/guest-full', function () {
-    return view('guest-full');
+    return view('guest.guest-full');
 });
 Route::get('/guest-success', function () {
-    return view('guest-success');
+    return view('guest.guest-success');
 });
 Route::get('/guest-index', function () {
     return view('layouts.guest-index');
