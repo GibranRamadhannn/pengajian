@@ -45,7 +45,12 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $loop->iteration }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $participant->name }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $participant->phone }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $participant->gender }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        @if ($participant->gender == 'P')
+                        Ikhwan
+                        @else
+                        Akhwan
+                    @endif</td>
                     <td class="p-4 text-center">
                         <div class="flex flex-col items-center">
                             <div class="flex-shrink-0">
@@ -64,7 +69,7 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <!-- Edt Action Button -->
-                        <a href="{{ route('participant.edit', $participant->id) }}" id="open-modal-edit-participant"
+                        <a href="{{url('/participant/'.$participant->id.'/edit') }}" id="open-modal-edit-participant"
                             class="text-indigo-600 hover:text-indigo-900" data-id="{{ $participant->id }}">Edit</a>
                         <!-- Delete Action Button -->
                         <a href="#" class="ml-2 text-red-600 hover:text-red-900">Delete</a>

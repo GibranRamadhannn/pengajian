@@ -10,15 +10,16 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('guest')->group(function () {
     Route::get('/', [GuestController::class, 'index'])->name('guest.home');
     Route::get('/participant/{indexgender?}/{gender?}', [ParticipantsController::class, 'create'])->name('participant.create');
-    Route::post('/participant/store', [ParticipantsController::class, 'store'])->name('participant.store');
+    Route::post('/participant/store/{gender}', [ParticipantsController::class, 'store'])->name('participant.store');
 });
 
+Route::get('/guest/barcode', function(){
+    return view('guest.guest-profile');
+});
 Route::get('/guest-full', function () {
     return view('guest.guest-full');
-});
-Route::get('/guest-success', function () {
-    return view('guest.guest-success');
-});
+})->name('guest-full');
+Route::get('/guest-success/{id}',[ParticipantsController::class, 'guess_success'])->name('guest-success');
 Route::get('/guest-index', function () {
     return view('layouts.guest-index');
 });
@@ -28,6 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/dashboard', [ParticipantsController::class, 'index'])->name('dashboard');
+    Route::get('/barcode-check', [ParticipantsController::class, 'barcode']);
+    Route::get('/barcode-check/{barode}', [ParticipantsController::class, 'barcode_check']);
+    Route::post('/barcode/check-in', [ParticipantsController::class, 'check_in']);
     Route::get('/participant/{id}/edit', [ParticipantsController::class, 'edit'])->name('participant.edit');
 });
 

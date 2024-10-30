@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     const modal = document.getElementById("modal-edit-participant");
     const closeModalButtons = document.querySelectorAll(".close-modal");
     const openModalButton = document.getElementById(
@@ -55,4 +60,62 @@ document.addEventListener("DOMContentLoaded", function () {
             closeModal();
         }
     });
+
+    $('#scan-barcode').on('change', function(){
+       let barcode =  $('#scan-barcode').val();
+      $.ajax({
+        method : "GET",
+        url : "/barcode-check/"+ barcode,
+        success : function(response){
+            if (response.status === 'success') {
+                // Menambahkan data peserta ke tabel
+                $('#participant-table-one tbody').empty();
+                var participant = response.participant;
+                var gender = participant.gender === 'P' ? 'Akhwan' : 'Ihkwan';
+                alert("data ditemukan silahkan masuk")
+                $('#participant-table-one tbody').append(
+                    '<tr>' +
+                        '<td>' + participant.name + '</td>' +
+                        '<td>' + participant.phone + '</td>' +
+                        '<td>' + gender + '</td>' +
+                        '<td>' + participant.barcode_check_in_1 + '</td>' +
+                        '<td><span id="action-check-in" data-id="'+ participant.id+'" class="bg-blue-950" > Check In </span>'+
+                    '</tr>'
+                );
+                $('#scan-barcode').val('')
+             
+            } else {
+                $('#participant-table-one tbody').empty();
+                $('#scan-barcode').val('')
+                alert(response.message);
+
+            }
+            
+        }
+      })
+    })
+    $(document).ready(function(){
+        // $('#action-check-in').addAttr('class')
+        $('#action-check-in').addClass('bg-black');
+    })
+        $(document).on('click', '#action-check-in', function(){
+            let id = $(this).data('id');
+            console.log(id)
+
+            $.ajax({
+                data : {'id' : id},
+                method : 'POST',
+                url : '/barcode/check-in',
+                success : function(response){
+                    console.log(response.code);
+                    if(response.code == 202){
+                        alert('Anda sudah check in sebelumnya !');
+                        $('#participant-table-one tbody').empty();
+                    }else if(response.code == 200){
+                        alert('Terima Kasih sudah check in');
+                        $('#participant-table-one tbody').empty();
+                    }
+                }
+            })
+        });
 });
