@@ -24,14 +24,14 @@
 <div class="p-2 md:p-4 flex flex-col justify-center items-center">
     <!-- barcode begin -->
     <div class="p-2 md:p-4">
-        <div class="w-[16cm] h-[6cm] bg-white mb-8">
-            <span class=" h-[6cm] bg-white items-center font-bold uppercase">{{ $barcode->name }}</span>
+        <div class="w-fit h-[6cm] bg-white mb-8  ">
+            <span class=" h-[6cm]  items-center text-center  font-bold uppercase"><p class="text-center">{{ $barcode->name }}</p></span>
             <?php
             $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
             $barcode1 = base64_encode($generator->getBarcode($barcode->barcode_check_in_1, $generator::TYPE_CODE_128));
             ?>
             <img src="data:image/png;base64,<?= $barcode1 ?>" class="w-[500cm] h-[6cm] bg-white" alt="Barcode">
-            <span class="size-[] h-[6cm] bg-white items-center font-bold uppercase">{{ $barcode->barcode_check_in_1 }}</span>
+            <span class=" h-[6cm] bg-white items-center font-bold uppercase"><p class="text-center text-white">{{ $barcode->barcode_check_in_1 }}</p></span>
         </div>
     </div>
     <!-- barcode end -->
@@ -48,9 +48,9 @@
                 </path>
             </g> --}}
         </svg>
-        <p href="#" class="text-xs font-normal text-yellow-500 hover:text-blue-300 underline italic"
+        <p  class="text-xs font-normal text-yellow-500 hover:text-blue-300 underline italic"
             style="font-family: Montserrat">
-            pelajari lebih lanjut
+            <a href="{{ asset('files/BAI20241031_08445952.pdf') }}" class="text-xs font-normal text-yellow-500 hover:text-blue-300 underline italic">Pelajari Lebih lanjut ! </a> 
         </p>
     </div>
 </div>

@@ -29,8 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/dashboard', [ParticipantsController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/{nama}', [ParticipantsController::class, 'searchNama']);
     Route::get('/barcode-check', [ParticipantsController::class, 'barcode']);
-    Route::get('/barcode-check/{barode}', [ParticipantsController::class, 'barcode_check']);
+    Route::get('/barcode-check/{barcode}', [ParticipantsController::class, 'barcode_check']);
     Route::post('/barcode/check-in', [ParticipantsController::class, 'check_in']);
     Route::get('/participant/{id}/edit', [ParticipantsController::class, 'edit'])->name('participant.edit');
 });

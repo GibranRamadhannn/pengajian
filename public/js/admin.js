@@ -78,8 +78,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         '<td>' + participant.name + '</td>' +
                         '<td>' + participant.phone + '</td>' +
                         '<td>' + gender + '</td>' +
+                        '<td>' + participant.age + '</td>' +
                         '<td>' + participant.barcode_check_in_1 + '</td>' +
                         '<td><span id="action-check-in" data-id="'+ participant.id+'" class="bg-blue-950" > Check In </span>'+
+                        '<td><span id="action-kirim-pesan" data-phone="'+ participant.phone+'" class="bg-blue-950" > Kirim Pesan </span>'+
                     '</tr>'
                 );
                 $('#scan-barcode').val('')
@@ -117,5 +119,34 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 }
             })
+        });
+        $(document).on('click', '#action-kirim-pesan', function(){
+            let phone = $(this).data('phone');
+            let nomorAkhir = phone.replace(/^0+/, '');
+            let message = "terima kasih telah datang ke dauroh";
+        
+            $.ajax({
+                url: "https://api.watzap.id/v1/send_message",
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    "api_key": "SLBM0TX4OEVRWGHK",
+                    "number_key": "VITkVB5m2lcnmRFS",
+                    "phone_no": "62" + nomorAkhir,
+                    "message": message
+                }),
+                beforeSend: function(xhr) {
+                    // Menghapus header X-CSRF-TOKEN untuk permintaan ini agar tidak memicu CORS
+                    xhr.setRequestHeader('X-CSRF-TOKEN', '');
+                },
+                success: function(response) {
+                    console.log(response);
+                    alert("Pesan berhasil dikirim");
+                },
+                error: function(xhr, status, error) {
+                    console.error("Gagal mengirim pesan:", error);
+                    alert("Gagal mengirim pesan. Silakan coba lagi.");
+                }
+            });
         });
 });

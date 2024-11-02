@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
 use App\Models\Participants;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class ParticipantsController extends Controller
@@ -12,12 +14,18 @@ class ParticipantsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
         $participants = Participants::all();
-        return view('admin.dashboard', compact('participants'));
+        $participant_pria = Participants::selectRaw('count(gender) as gender_pria')->where('gender', 'P')->first();
+        $participant_wanita = Participants::selectRaw('count(gender) as gender_wanita')->where('gender', 'W')->first();
+        // return view('admin.dashboard', compact('participants', 'participant_pria', 'participant_wanita'));
+        return view('admin.dashboard', [
+            'participants' => Participants::paginate(15),
+            'participant_pria' => $participant_pria,
+            'participant_wanita' => $participant_wanita
+        ]);
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -78,10 +86,11 @@ class ParticipantsController extends Controller
                             'barcode_check_out_1' => $tokenCheckOut1,
                             'barcode_check_in_2' => $tokenCheckIn2,
                             'barcode_check_out_2' => $tokenCheckOut2,
+                            'status_check_in'=>0
                         ]);
                         $participant1 = Participants::where('id', $participant->id)->select('name', 'barcode_check_in_1')->first();
                         // return redirect()->route('guest-success', $participant->id)->with('success', 'Peserta berhasil ditambahkan!');
-                        return redirect('/guest-success/'. $participant->id)->with('success', 'Peserta berhasil ditambahkan!')->compact('participant1');
+                        return redirect('/guest-success/'. $participant->id)->with('success', 'Peserta berhasil ditambahkan!');
                     }
                 }else{
                     if($participant_wanita->gender_wanita >= 75){
@@ -98,6 +107,7 @@ class ParticipantsController extends Controller
                             'barcode_check_out_1' => $tokenCheckOut1,
                             'barcode_check_in_2' => $tokenCheckIn2,
                             'barcode_check_out_2' => $tokenCheckOut2,
+                            'status_check_in'=>0
                         ]);
                         return redirect('/guest-success/'. $participant->id)->with('success', 'Peserta berhasil ditambahkan!');
                     }
@@ -127,7 +137,6 @@ class ParticipantsController extends Controller
      */
     public function edit($id)
     {
-        dd($id);
         $participant = Participants::findOrFail($id);
         $participants = Participants::all();
         return view('guest.guest', compact('participant', 'participants'));
@@ -188,7 +197,7 @@ class ParticipantsController extends Controller
     private function generateTokenCheckIn1()
     {
         do {
-            $randomNumber = random_int(1000, 9999);
+            $randomNumber = random_int(100, 300);
             $date = now()->format('Ymd');
             $token = 'CI' . $date . '-' . $randomNumber;
         } while (Participants::where('barcode_check_in_1', $token)->exists());
@@ -246,7 +255,7 @@ class ParticipantsController extends Controller
         return view('admin.barcode-check', compact('participants'));
     }
     public function barcode_check($barcode){
-        $participant = Participants::where('barcode_check_in_1', $barcode)->first();
+        $participant = Participants::where('barcode_check_in_1', 'like', '%'. $barcode. '%')->first();
         // dd($participant);
 
          if($participant){
