@@ -21,19 +21,20 @@
         <div
             class="relative isolate overflow-hidden bg-gray-900 p-4 shadow-2xl rounded-xl sm:rounded-3xl sm:px-4 md:pt-24 lg:flex lg:gap-x-20 lg:px-20 lg:pt-0 flex-row">
             <!-- Form Card & csrf token -->
-            <form action="{{ route('participant.store') }}" method="POST">
+            <form action="/participant/store/{{ $indexgender }}" method="POST">
                 @csrf
                 <div class="mx-auto max-w-full text-center lg:mx-0 lg:flex-auto lg:py-12 lg:text-left">
                     <!-- Input Nama lengkap -->
                     <div class="mb-2" style="font-family: Montserrat">
                         <!-- Label -->
-                        @if ($indexgender == 'pria' && $gender == 'P')
-                        <label for="name" class="block text-xl font-medium leading-1 text-blue-300">Nama
-                            Lengkap</label>
-                        @else
+                        {{-- @if ($indexgender == 'pria' && $gender == 'P') --}}
+                        <label for="name" class="{{ $indexgender == 'P' ? 'block text-xl font-medium leading-1 text-blue-300' : 'block text-xl font-medium leading-1 text-pink-300' }}">
+                            Nama Lengkap
+                        </label>
+                        {{-- @else
                         <label for="name" class="block text-xl font-medium leading-1 text-pink-300">Nama
                             Lengkap</label>
-                        @endif
+                        @endif --}}
                         <!-- Input -->
                         <div class="relative mt-2 rounded-md shadow-sm">
                             <input type="text" name="name" id="name" value="{{ old('name') }}"
@@ -45,13 +46,13 @@
                     <!-- Input Nomor WA -->
                     <div class="mb-2" style="font-family: Montserrat">
                         <!-- Label -->
-                        @if ($indexgender === 'pria' && $gender === 'P')
-                        <label for="phone" class="block text-xl font-medium leading-1 text-blue-300">Nomor WA
+                        {{-- @if ($indexgender === 'pria' && $gender === 'P') --}}
+                        <label for="phone" class="{{ $indexgender == 'P' ? 'block text-xl font-medium leading-1 text-blue-300' : 'block text-xl font-medium leading-1 text-pink-300' }}">Nomor WA
                             Aktif</label>
-                        @else
+                        {{-- @else
                         <label for="phone" class="block text-xl font-medium leading-1 text-pink-300">Nomor WA
                             Aktif</label>
-                        @endif
+                        @endif --}}
                         <!-- Input -->
                         <div class="relative mt-2 rounded-md shadow-sm">
                             <input type="text" name="phone" id="phone" value="{{ old('phone') }}"
@@ -63,17 +64,17 @@
                     <!-- Input Usia -->
                     <div class="mt-2" style="font-family: Montserrat">
                         <!-- label -->
-                        @if ($indexgender === 'pria' && $gender === 'P')
-                        <label class="block text-xl font-medium leading-1 text-blue-300">Usia
+                        {{-- @if ($indexgender === 'pria' && $gender === 'P') --}}
+                        <label class="{{ $indexgender == 'P' ? 'block text-xl font-medium leading-1 text-blue-300' : 'block text-xl font-medium leading-1 text-pink-300' }}">Usia
                             (tahun)
                         </label>
-                        @else
+                        {{-- @else
                         <label class="block text-xl font-medium leading-1 text-pink-300">Usia
                             (tahun)
                         </label>
-                        @endif
+                        @endif --}}
                         <!-- option -->
-                        @if ($indexgender === 'pria' && $gender === 'P')
+                        @if ($indexgender === 'P' || $gender === 'pria')
                         <div class="inline-flex gap-5 md:inline-flex justify-center items-center">
                             <!-- Age Radio Options : Remaja -->
                             <div class="flex items-center gap-x-1">

@@ -15,11 +15,12 @@ class Participants extends Model
         'age',
         'phone',
         'gender',
-        // 'lunch_voucher_1',
-        // 'lunch_voucher_2',
+        'status_check_in',
+        'lunch_voucher_1',
+        'lunch_voucher_2',
         'barcode_check_in_1',
-        // 'barcode_check_out_1',
-        // 'barcode_check_in_2',
-        // 'barcode_check_out_2'
+        'barcode_check_out_1',
+        'barcode_check_in_2',
+        'barcode_check_out_2'
     ];
 }

@@ -5,8 +5,32 @@
 <div class="container mx-auto p-6 rounded-lg shadow-lg bg-white">
     <!-- Title -->
     <h1 class="text-3xl font-bold text-black mb-6">Participant</h1>
+    <h3 class="text-xl font-bold text-black mb-6">Participant Info</h1>
+    <div  class="rounded-lg shadow-lg p-4">
+        <table>
+            <tr>
+                <td>Total Ikhwat  </td>
+                <td> :       </td>
+                <td>{{ $participant_pria->gender_pria }}</td>
+                <td >       Peserta</td>
+            </tr>
+            <tr>
+                <td>Total Akhwat  </td>
+                <td> :       </td>
+                <td>{{ $participant_wanita->gender_wanita }}</td>
+                <td>        Peserta</td>
+            </tr>
+        </table>
+    </div>
     <!-- Table Code begin -->
     <div class="rounded-lg shadow-lg p-4">
+        <div class="row">
+            <div class="relative mt-2 mb-5 rounded-md shadow-sm col">
+                <input type="text" name="search_name" id="search_name" value="{{ old('name') }}"
+                    class="block w-full rounded-md border-0 py-2 pl-7 pr-20 text-black ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 placeholder:text-sm focus:ring-inset focus:ring-yellow-500 focus:ring-4 sm:text-sm sm:leading-6"
+                    placeholder="Masukkan Nama Lengkap">
+            </div>
+        </div>
         <table class="min-w-full divide-y divide-gray-200 bg-white border border-gray-200 overflow-x-auto "
             id="participant-table">
             <!-- Table Head begin -->
@@ -45,7 +69,12 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $loop->iteration }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $participant->name }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $participant->phone }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $participant->gender }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        @if ($participant->gender == 'P')
+                        Ikhwan
+                        @else
+                        Akhwan
+                    @endif</td>
                     <td class="p-4 text-center">
                         <div class="flex flex-col items-center">
                             <div class="flex-shrink-0">
@@ -64,7 +93,7 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <!-- Edt Action Button -->
-                        <a href="{{ route('participant.edit', $participant->id) }}" id="open-modal-edit-participant"
+                        <a href="{{url('/participant/'.$participant->id.'/edit') }}" id="open-modal-edit-participant"
                             class="text-indigo-600 hover:text-indigo-900" data-id="{{ $participant->id }}">Edit</a>
                         <!-- Delete Action Button -->
                         <a href="#" class="ml-2 text-red-600 hover:text-red-900">Delete</a>
@@ -74,8 +103,10 @@
                 <!-- Table Row end -->
                 @endforeach
             </tbody>
+           
             <!-- Table Body End -->
         </table>
+        {{ $participants->links() }}
     </div>
     <!-- Table Code end -->
 </div>

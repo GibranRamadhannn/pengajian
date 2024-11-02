@@ -24,7 +24,15 @@
 <div class="p-2 md:p-4 flex flex-col justify-center items-center">
     <!-- barcode begin -->
     <div class="p-2 md:p-4">
-        <img src="{{ asset('/images/barcode_sample-2.png') }}" alt="" class="w-50 h-50 md:w-[400px] md:h-50">
+        <div class="w-fit h-[6cm] bg-white mb-8  ">
+            <span class=" h-[6cm]  items-center text-center  font-bold uppercase"><p class="text-center">{{ $barcode->name }}</p></span>
+            <?php
+            $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
+            $barcode1 = base64_encode($generator->getBarcode($barcode->barcode_check_in_1, $generator::TYPE_CODE_128));
+            ?>
+            <img src="data:image/png;base64,<?= $barcode1 ?>" class="w-[500cm] h-[6cm] bg-white" alt="Barcode">
+            <span class=" h-[6cm] bg-white items-center font-bold uppercase"><p class="text-center text-white">{{ $barcode->barcode_check_in_1 }}</p></span>
+        </div>
     </div>
     <!-- barcode end -->
     <!-- teks -->
@@ -32,17 +40,17 @@
         screenshot layar ini</h1>
     <!-- icon & teks -->
     <div class="inline-flex justify-center items-center w-full gap-3 mt-2">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" id="info" width="20" height="20">
+        {{-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" id="info" width="20" height="20">
             <g fill="#eab308">
                 <path d="M8 2a6 6 0 1 0 6 6 6 6 0 0 0-6-6Zm0 11a5 5 0 1 1 5-5 5 5 0 0 1-5 5Z"></path>
                 <path
                     d="M8 6.85a.5.5 0 0 0-.5.5v3.4a.5.5 0 0 0 1 0v-3.4a.5.5 0 0 0-.5-.5zM8 4.8a.53.53 0 0 0-.51.52v.08a.47.47 0 0 0 .51.47.52.52 0 0 0 .5-.5v-.12A.45.45 0 0 0 8 4.8z">
                 </path>
-            </g>
+            </g> --}}
         </svg>
-        <p href="#" class="text-xs font-normal text-yellow-500 hover:text-blue-300 underline italic"
+        <p  class="text-xs font-normal text-yellow-500 hover:text-blue-300 underline italic"
             style="font-family: Montserrat">
-            pelajari lebih lanjut
+            <a href="{{ asset('files/BAI20241031_08445952.pdf') }}" class="text-xs font-normal text-yellow-500 hover:text-blue-300 underline italic">Pelajari Lebih lanjut ! </a> 
         </p>
     </div>
 </div>
