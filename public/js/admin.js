@@ -73,17 +73,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 var participant = response.participant;
                 var gender = participant.gender === 'P' ? 'Akhwan' : 'Ihkwan';
                 alert("data ditemukan silahkan masuk")
-                $('#participant-table-one tbody').append(
-                    '<tr>' +
-                        '<td>' + participant.name + '</td>' +
-                        '<td>' + participant.phone + '</td>' +
-                        '<td>' + gender + '</td>' +
-                        '<td>' + participant.age + '</td>' +
-                        '<td>' + participant.barcode_check_in_1 + '</td>' +
-                        '<td><span id="action-check-in" data-id="'+ participant.id+'" class="bg-blue-950" > Check In </span>'+
-                        '<td><span id="action-kirim-pesan" data-phone="'+ participant.phone+'" class="bg-blue-950" > Kirim Pesan </span>'+
-                    '</tr>'
-                );
+                participant.forEach(function(item) {
+                    let gender = item.gender; // Pastikan gender didefinisikan dalam objek participant
+                
+                    $('#participant-table-one tbody').append(
+                        '<tr>' +
+                            '<td>' + item.name + '</td>' +
+                            '<td>' + item.phone + '</td>' +
+                            '<td>' + gender + '</td>' +
+                            '<td>' + item.age + '</td>' +
+                            '<td>' + item.barcode_check_in_1 + '</td>' +
+                            '<td><span id="action-check-in" data-id="'+ item.id +'" class="bg-blue-950">Check In</span></td>' +
+                            // '<td><span id="action-kirim-pesan" data-phone="'+ item.phone +'" class="bg-blue-950">Kirim Pesan</span></td>' +
+                        '</tr>'
+                    );
+                });
                 $('#scan-barcode').val('')
              
             } else {
@@ -149,4 +153,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
         });
+       $(document).on('click', '#send-wa', function() {
+    let id = $(this).data('id');
+    $.ajax({
+        url: "/send-wa/" + id,
+        method: "POST",
+        success: function(response) {
+            console.log(response.status)
+            // Memeriksa status di dalam objek response jika server mengirimkannya
+            if (response.status == 200) {
+                alert('Kirim Pesan Berhasil');
+            } else {
+                alert('Kirim Pesan Gagal');
+            }
+        },
+        error: function() {
+            alert('Terjadi kesalahan saat mengirim pesan');
+        }
+    });
+});
+
 });

@@ -5,11 +5,15 @@
 <div class="container mx-auto p-6 rounded-lg shadow-lg bg-white">
     <!-- Title -->
     <h1 class="text-3xl font-bold text-black mb-6">Participant</h1>
-    <h3 class="text-xl font-bold text-black mb-6">Participant Info</h1>
+    <div class="w-[30%]">
+    <h3 class="text-xl font-bold text-black mb-6 bg-blue-400" ><a href="/barcode-check">Check Barcode</a></h1>
+        
+    </div>
     <div  class="rounded-lg shadow-lg p-4">
+    <h3 class="text-xl font-bold text-black mb-6">Participant Info</h1>
         <table>
             <tr>
-                <td>Total Ikhwat  </td>
+                <td>Total Ikhwan  </td>
                 <td> :       </td>
                 <td>{{ $participant_pria->gender_pria }}</td>
                 <td >       Peserta</td>
@@ -24,13 +28,6 @@
     </div>
     <!-- Table Code begin -->
     <div class="rounded-lg shadow-lg p-4">
-        <div class="row">
-            <div class="relative mt-2 mb-5 rounded-md shadow-sm col">
-                <input type="text" name="search_name" id="search_name" value="{{ old('name') }}"
-                    class="block w-full rounded-md border-0 py-2 pl-7 pr-20 text-black ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 placeholder:text-sm focus:ring-inset focus:ring-yellow-500 focus:ring-4 sm:text-sm sm:leading-6"
-                    placeholder="Masukkan Nama Lengkap">
-            </div>
-        </div>
         <table class="min-w-full divide-y divide-gray-200 bg-white border border-gray-200 overflow-x-auto "
             id="participant-table">
             <!-- Table Head begin -->
@@ -47,6 +44,12 @@
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Gender
+                    </th>
+                    <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Class
+                    </th>
+                      <th scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status Check In
                     </th>
                     <th scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Barcode
@@ -69,12 +72,21 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $loop->iteration }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $participant->name }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $participant->phone }}</td>
+                    
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         @if ($participant->gender == 'P')
                         Ikhwan
                         @else
-                        Akhwan
+                        Akhwat
                     @endif</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $participant->age }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        @if($participant->status_check_in == 1)
+                        Telah Check In
+                        @else
+                        belum check in
+                        @endif
+                    </td>
                     <td class="p-4 text-center">
                         <div class="flex flex-col items-center">
                             <div class="flex-shrink-0">
@@ -93,10 +105,11 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <!-- Edt Action Button -->
-                        <a href="{{url('/participant/'.$participant->id.'/edit') }}" id="open-modal-edit-participant"
-                            class="text-indigo-600 hover:text-indigo-900" data-id="{{ $participant->id }}">Edit</a>
+                        <!--<a href="{{url('/participant/'.$participant->id.'/edit') }}" id="open-modal-edit-participant"-->
+                        <!--    class="text-indigo-600 hover:text-indigo-900" data-id="{{ $participant->id }}">Edit</a>-->
                         <!-- Delete Action Button -->
-                        <a href="#" class="ml-2 text-red-600 hover:text-red-900">Delete</a>
+                        <!--<a href="#" class="ml-2 text-red-600 hover:text-red-900">Delete</a>-->
+                         <span id="send-wa" data-id="{{ $participant->id }}" class="ml-2 text-white-600 hover:text-blue-900">Kirim Ke WA</span>
                     </td>
                     <!-- Row Body Items begin -->
                 </tr>
@@ -149,3 +162,6 @@
         </div>
     </div>
 </div>
+
+    <!--<script src="{{ asset('js/admin.js') }}"></script>-->
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
